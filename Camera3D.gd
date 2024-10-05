@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Camera3D
 @export var aceleracion = 25.0
 @export var moveSpeed =5.0
 @export var mousespeed = 300.0
@@ -19,7 +19,7 @@ func _process(delta):
 		velocidad = velocidad.normalized() * moveSpeed
 	
 	
-	translate(velocity * delta)
+	translate(velocidad * delta)
 
 func _input(event):
 	if event is InputEventMouseMotion: 

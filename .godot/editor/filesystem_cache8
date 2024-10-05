@@ -1,3 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1728139057
+::res://::1728144273
+Camera3D.gd::GDScript::-1::1728144207::0::1::::<>Camera3D<>::
 icon.svg::CompressedTexture2D::6538647666380795841::1728139050::1728139058::1::::<><>::
+main.gd::GDScript::-1::1728141373::0::1::::<>Node3D<>::
+main.tscn::PackedScene::7236691504538424008::1728144220::0::1::::<><>::res://Camera3D.gd
+player.gd::GDScript::-1::1728144194::0::1::::<>CharacterBody3D<>::
+player.tscn::PackedScene::8443010928003035181::1728144220::0::1::::<><>::res://player.gd
