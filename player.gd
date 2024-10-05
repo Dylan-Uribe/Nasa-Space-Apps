@@ -1,6 +1,6 @@
 extends CharacterBody3D
 @export var aceleracion = 25.0
-@export var moveSpeed =5.0
+@export var moveSpeed =30.0
 @export var mousespeed = 300.0
 
 var velocidad = Vector3.ZERO

@@ -11,6 +11,9 @@ var coordinates: Vector3
 var magnitude: float
 var star_type: String
 
+# Declare a variable to hold a reference to the label
+var label: Label3D
+
 # Initialize the star with attributes
 func _init(name: String, position: Vector3, magnitude: float = 1.0, star_type: String = "G"):
 	star_name = name
@@ -24,10 +27,25 @@ func _init(name: String, position: Vector3, magnitude: float = 1.0, star_type: S
 	mesh_instance.material_override = STARMESH
 	mesh_instance.scale = Vector3(magnitude, magnitude, magnitude)  # Scale the mesh based on the star's magnitude
 	add_child(mesh_instance)
-	
+
 	# Optionally, create a label for the star name
-	var label = Label3D.new()
+	label = Label3D.new()
 	label.text = star_name
-	label.position = Vector3(0, 1, 0)  # Position the label above the star
+	label.position = Vector3(0, magnitude, 0)  # Position the label above the star
 	add_child(label)
+
 	translate(position)
+
+func _process(delta):
+	# Get the camera node in the current scene
+	var camera = get_tree().current_scene.get_node("Camera3D")  # Adjust the path based on your scene structure
+	if camera:
+		# Calculate the direction from the label to the camera
+		var direction = (camera.position - label.position).normalized()
+		
+		# Make the label look at the camera position
+		label.look_at(camera.position)
+		
+		# Optional: Adjust for the label orientation
+		label.rotation_degrees.y += 180  # Adjust the Y rotation to face the camera correctly
+
