@@ -43,3 +43,4 @@ func updateDirection():
 		velocidad = Vector3.ZERO
 	
 	return dir.normalized()
+	move_and_slide()

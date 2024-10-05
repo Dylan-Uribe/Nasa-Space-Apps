@@ -19,6 +19,7 @@ func _process(delta):
 		velocidad = velocidad.normalized() * moveSpeed
 	
 	
+	
 	translate(velocidad * delta)
 
 func _input(event):

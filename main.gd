@@ -1,11 +1,9 @@
 extends Node3D
+# Function to create and add stars to the 3D environment
+func create_star(name: String, position: Vector3, magnitude: float, star_type: String):
+	var star = preload("res://star.gd").new(name, position, magnitude, star_type)
+	add_child(star)
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+	# Example: Adding stars
+	create_star("Star Alpha", Vector3(0, 0, 1), 1.0, "G")
