@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbdritcgssd3u"]
+[gd_scene load_steps=7 format=3 uid="uid://dbdritcgssd3u"]
 
 [ext_resource type="Script" path="res://Camera3D.gd" id="1_0exho"]
 [ext_resource type="Script" path="res://main.gd" id="1_8jovd"]
 [ext_resource type="Material" uid="uid://dc5x1qo8rew24" path="res://starmesh.tres" id="1_art07"]
+[ext_resource type="PackedScene" uid="uid://c2ohkal3n11ou" path="res://control.tscn" id="4_47t0l"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_vx4jj"]
 material = ExtResource("1_art07")
@@ -10,6 +11,7 @@ material = ExtResource("1_art07")
 [sub_resource type="SphereShape3D" id="SphereShape3D_44qrj"]
 
 [node name="main" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.01752, 0.220052, -0.104563)
 script = ExtResource("1_8jovd")
 
 [node name="Star" type="StaticBody3D" parent="."]
@@ -23,6 +25,11 @@ shape = SubResource("SphereShape3D_44qrj")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 script = ExtResource("1_0exho")
+aceleracion = null
+moveSpeed = null
+mousespeed = null
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
 transform = Transform3D(1.0284, -0.00756422, -0.00690906, -0.00707861, -0.0215719, -1.00446, 0.00131107, 5.81684, -0.00373407, 0, 0, 0)
+
+[node name="Control" parent="." instance=ExtResource("4_47t0l")]

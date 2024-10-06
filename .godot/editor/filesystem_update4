@@ -4,3 +4,6 @@ res://player.gd
 res://Camera3D.gd
 res://star.gd
 res://main.gd
+res://Control.gd
+res://ItemList.gd
+res://control.tscn
