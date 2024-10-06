@@ -1,3 +1,4 @@
+Camera3D
 CollisionShape3D
 Area3D
 MeshInstance3D
@@ -9,6 +10,5 @@ ReferenceRect
 Container
 LineEdit
 RayCast3D
-Camera3D
 Node3D
 CharacterBody3D

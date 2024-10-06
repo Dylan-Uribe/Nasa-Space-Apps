@@ -1,20 +1,19 @@
 extends Camera3D
-
+const STARMESH = preload("res://starmesh.tres")
 @export var aceleracion = 25.0
 @export var moveSpeed = 5.0
 @export var mousespeed = 300.0
 var mouseMode = true
+var points:Array
+var lines:Array
+var mouse_line: MeshInstance3D
 
 var velocidad = Vector3.ZERO
 var lookAngles = Vector2.ZERO
 
-var selected_stars = []
-var path: Path3D
-
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	path = Path3D.new()
-	add_child(path)
+
 
 func _process(delta):
 	lookAngles.y = clamp(lookAngles.y, PI / -2, PI / 2)
@@ -28,8 +27,6 @@ func _process(delta):
 		velocidad = velocidad.normalized() * moveSpeed
 	
 	translate(velocidad * delta)
-	if selected_stars.size() == 2:
-		drawpath()
 
 func _input(event):
 	
@@ -39,6 +36,9 @@ func _input(event):
 			lookAngles -= event.relative / mousespeed
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			if event.is_action_pressed("select"):
+				_draw_point_and_line()
+			
 	
 	# Check for the "release" action to toggle mouse mode
 	if event.is_action_pressed("release"):
@@ -69,31 +69,59 @@ func updateDirection():
 		velocidad = Vector3.ZERO
 	
 	return dir.normalized()
-func selectStar():
-	var space_state = get_world_3d().direct_space_state
-	var ray_origin = global_transform.origin
-	var ray_direction = -global_transform.basis.z
+func get_mouse_pos():
+	var space_state = get_parent().get_world_3d().get_direct_space_state()
+	var mouse_position = get_viewport().get_mouse_position()
+	var camera = get_tree().root.get_camera_3d()
 	
-	var ray_params = {
-		"from": ray_origin,
-		"to": ray_origin + ray_direction * 100, "exclude": [],
-		"collide_with_areas": false, "collide_with_bodies": true
-	}
-	var result = space_state.intersect_ray(ray_params)
+	var ray_origin = camera.project_ray_origin(mouse_position)
+	var ray_end = ray_origin + camera.project_ray_normal(mouse_position) * 1000
 	
-	if result and "collider" in result:
-		var star = result.collider
-		if star is Star:
-			if star not in selected_stars:
-				selected_stars.append(star)
-				star.label.visible = true
-				if selected_stars.size() > 2:
-					selected_stars.remove(0)
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = ray_origin
+	params.to = ray_end
+	params.collision_mask = 1
+	params.exclude = []
+	
+	var rayDic = space_state.intersect_ray(params)
+	
+	if rayDic.has("position"):
+		return rayDic ["position"]
+	return null
+	
+func _update_mouse_line():
+	if mouse_line == null:
+		return  # Exit if mouse_line is not initialized
 
-func drawPath():
-	path.clear_points()
-	path.add_point(selected_stars[0].position)
-	path.add_point(selected_stars[1].position)
-	var line = MeshInstance3D.new()
-	line.mesh = CylinderMesh.new()
-	line.material_override=
+	var mouse_pos = get_mouse_pos()
+	var mouse_line_immediate_mesh = mouse_line.mesh as ImmediateMesh
+	if mouse_pos != null and mouse_line_immediate_mesh != null:
+		var mouse_pos_V3:Vector3 = mouse_pos
+		mouse_line_immediate_mesh.clear_surfaces()
+		mouse_line_immediate_mesh.surface_begin(Mesh.PRIMITIVE_LINES)
+		mouse_line_immediate_mesh.surface_add_vertex(Vector3.ZERO)
+		mouse_line_immediate_mesh.surface_add_vertex(mouse_pos_V3)
+		mouse_line_immediate_mesh.surface_end()
+func _draw_point_and_line()->void:
+	var mouse_pos = get_mouse_pos()
+	if mouse_pos != null:
+		var mouse_pos_V3:Vector3 = mouse_pos
+		
+		points.append(await D3d.point(mouse_pos_V3,0.05))
+		
+		#If there are at least 2 points...
+		if points.size() > 1:
+			#Draw a line from the position of the last point placed to the position of the second to last point placed
+			var point1 = points[points.size()-1]
+			var point2 = points[points.size()-2]
+			var line = await D3d.line(point1.position, point2.position)
+			lines.append(line)
+
+func _clear_points_and_lines()->void:
+	for p in points:
+		p.queue_free()
+	points.clear()
+		
+	for l in lines:
+		l.queue_free()
+	lines.clear()

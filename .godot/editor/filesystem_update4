@@ -1,9 +1,5 @@
 res://main.tscn
-res://player.tscn
-res://player.gd
-res://Camera3D.gd
-res://star.gd
-res://main.gd
-res://Control.gd
-res://ItemList.gd
+res://starmesh.tres
 res://control.tscn
+res://main.gd
+res://Camera3D.gd

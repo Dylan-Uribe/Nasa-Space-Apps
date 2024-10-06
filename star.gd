@@ -28,6 +28,17 @@ func _init(name: String, position: Vector3, magnitude: float = 1.0, star_type: S
 	mesh_instance.scale = Vector3(magnitude, magnitude, magnitude)  # Scale the mesh based on the star's magnitude
 	add_child(mesh_instance)
 
+	# Add a StaticBody3D for collision
+	var static_body = StaticBody3D.new()
+	add_child(static_body)
+
+	# Add a CollisionShape3D to the StaticBody3D
+	var collision_shape = CollisionShape3D.new()
+	var sphere_shape = SphereShape3D.new()
+	sphere_shape.radius = magnitude  # Set the radius based on the star's magnitude
+	collision_shape.shape = sphere_shape
+	static_body.add_child(collision_shape)
+
 	# Optionally, create a label for the star name
 	label = Label3D.new()
 	label.text = star_name
