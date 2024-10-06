@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbdritcgssd3u"]
+[gd_scene load_steps=5 format=3 uid="uid://dbdritcgssd3u"]
 
 [ext_resource type="Script" path="res://Camera3D.gd" id="1_0exho"]
 [ext_resource type="Script" path="res://main.gd" id="1_8jovd"]
-[ext_resource type="Script" path="res://Button.gd" id="3_m3aqj"]
 [ext_resource type="PackedScene" uid="uid://c2ohkal3n11ou" path="res://control.tscn" id="4_47t0l"]
-[ext_resource type="Script" path="res://Node2D.gd" id="4_87d52"]
 
 [sub_resource type="Environment" id="Environment_alh2x"]
 background_mode = 1
@@ -17,22 +15,8 @@ script = ExtResource("1_8jovd")
 
 [node name="Control" parent="." instance=ExtResource("4_47t0l")]
 
-[node name="Button" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 1029.0
-offset_top = 596.0
-offset_right = 1148.0
-offset_bottom = 647.0
-text = "Screenshot"
-script = ExtResource("3_m3aqj")
-
 [node name="Camera3D" type="Camera3D" parent="."]
 script = ExtResource("1_0exho")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_alh2x")
-
-[node name="Node2D" type="Node2D" parent="."]
-script = ExtResource("4_87d52")
-
-[node name="FileDialog" type="FileDialog" parent="."]

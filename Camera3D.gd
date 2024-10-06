@@ -1,7 +1,7 @@
 extends Camera3D
 const STARMESH = preload("res://starmesh.tres")
 @export var aceleracion = 25.0
-@export var moveSpeed = 5.0
+@export var moveSpeed = 100.0
 @export var mousespeed = 300.0
 var mouseMode = true
 var points:Array

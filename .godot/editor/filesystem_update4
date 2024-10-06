@@ -1,5 +1,11 @@
 res://main.tscn
 res://starmesh.tres
-res://control.tscn
 res://main.gd
+res://control.tscn
 res://Camera3D.gd
+res://star.gd
+res://exoplanet1.tres
+res://planet.gd
+res://Control.gd
+res://Node2D.gd
+res://Button.gd

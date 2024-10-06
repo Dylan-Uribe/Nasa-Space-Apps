@@ -1,7 +1,7 @@
 extends Node3D
 
 # Preload the star mesh resource
-const STARMESH = preload("res://starmesh.tres")
+const STARMESH = preload("res://exoplanet1.tres")
 
 # Star attributes
 var star_name: String
