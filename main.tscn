@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dbdritcgssd3u"]
+[gd_scene load_steps=8 format=3 uid="uid://dbdritcgssd3u"]
 
 [ext_resource type="Script" path="res://Camera3D.gd" id="1_0exho"]
 [ext_resource type="Script" path="res://main.gd" id="1_8jovd"]
 [ext_resource type="Script" path="res://Button.gd" id="3_m3aqj"]
+[ext_resource type="Script" path="res://ItemList.gd" id="4_0fw4q"]
 [ext_resource type="PackedScene" uid="uid://c2ohkal3n11ou" path="res://control.tscn" id="4_47t0l"]
 [ext_resource type="Script" path="res://Node2D.gd" id="4_87d52"]
 
@@ -25,6 +26,13 @@ offset_right = 1148.0
 offset_bottom = 647.0
 text = "Screenshot"
 script = ExtResource("3_m3aqj")
+
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = 929.0
+offset_right = 1155.0
+offset_bottom = 328.0
+script = ExtResource("4_0fw4q")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 script = ExtResource("1_0exho")

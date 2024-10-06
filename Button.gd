@@ -1,5 +1,5 @@
 extends Button
-
+@onready var item_list = $"../ItemList"
 @onready var file_dialog = $"../../FileDialog"
 
 # Called when the node enters the scene tree for the first time.
@@ -25,6 +25,7 @@ func _on_file_selected(path: String):
 # Function to take a screenshot
 func take_screenshot(path: String):
 	# Hide the button
+	item_list.visible=false
 	self.visible = false
 
 	# Wait for the frame to finish rendering
@@ -42,3 +43,4 @@ func take_screenshot(path: String):
 
 	# Show the button again
 	self.visible = true
+	item_list.visible= true

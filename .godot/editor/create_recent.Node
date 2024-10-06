@@ -1,3 +1,4 @@
+ItemList
 FileDialog
 Button
 Node2D
@@ -8,8 +9,6 @@ Area3D
 MeshInstance3D
 StaticBody3D
 RigidBody3D
-ItemList
 Panel
 ReferenceRect
 Container
-LineEdit

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2ohkal3n11ou"]
+[gd_scene load_steps=3 format=3 uid="uid://c2ohkal3n11ou"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_xdqac"]
+[ext_resource type="Script" path="res://ItemList.gd" id="2_ajyqi"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,3 +11,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xdqac")
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_ajyqi")
